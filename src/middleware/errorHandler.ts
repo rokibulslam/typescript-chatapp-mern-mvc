@@ -6,7 +6,7 @@ export const notFound = (req: Request, res: Response, next: NextFunction) => {
     next(error);
 };
 
-export const errorHandler = (err:any, req:Request, res:Response, next:NextFunction) => {
+export const errorHandler = (err:any, req:Request, res:Response) => {
     const statuCode = res.statusCode === 200 ? 500 : res.statusCode;
     res.status(statuCode);
     res.json({

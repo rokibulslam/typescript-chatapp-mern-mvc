@@ -7,7 +7,7 @@ const notFound = (req, res, next) => {
     next(error);
 };
 exports.notFound = notFound;
-const errorHandler = (err, req, res, next) => {
+const errorHandler = (err, req, res) => {
     const statuCode = res.statusCode === 200 ? 500 : res.statusCode;
     res.status(statuCode);
     res.json({
