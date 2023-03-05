@@ -14,11 +14,10 @@ export interface UserDocument extends mongoose.Document {
 const userScema: Schema<UserDocument> = new mongoose.Schema(
   {
     name: { type: String, required: true },
-    email: { type: String, required: true },
+    email: { type: String, required: true, unique:true },
     password: { type: String, required: true },
     picture: {
       type: String,
-      required: true,
       default: "https://i.ibb.co/Qd16vVN/istockphoto-522855255-612x612.jpg",
     },
   },
