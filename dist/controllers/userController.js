@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.authUser = exports.registerUser = void 0;
+exports.allUser = exports.authUser = exports.registerUser = void 0;
 const jwt_1 = require("../config/jwt");
 const userModel_1 = __importDefault(require("../model/userModel"));
 const express_async_handler_1 = __importDefault(require("express-async-handler"));
@@ -61,5 +61,18 @@ exports.authUser = (0, express_async_handler_1.default)((req, res) => __awaiter(
         res.status(400);
         throw new Error("Invalid Email or Password");
     }
+}));
+// Query: api/users?search=rokibul&city=pabna 
+exports.allUser = (0, express_async_handler_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const keyword = req.query.search ? {
+        $or: [
+            { name: { $regex: req.query.search, $options: "i" } },
+            { email: { $regex: req.query.search, $options: "i" } }
+        ]
+    } : {};
+    const users = yield userModel_1.default.find(keyword).find({
+        _id: { $ne: res.locals.user._id },
+    });
+    res.send(users);
 }));
 //# sourceMappingURL=userController.js.map

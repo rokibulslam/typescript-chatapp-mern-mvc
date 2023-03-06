@@ -49,3 +49,19 @@ export const authUser = asyncHandler(async (req:Request, res:Response) => {
       throw new Error("Invalid Email or Password");
     }
 });
+
+
+// Query: api/users?search=rokibul&city=pabna 
+export const allUser = asyncHandler(async (req:Request, res:Response) => {
+  const keyword = req.query.search ? {
+    $or: [
+      { name: { $regex: req.query.search, $options: "i" } },
+      { email: { $regex: req.query.search, $options: "i" } }
+    ]
+  } : {};
+
+  const users = await User.find(keyword).find({
+    _id: { $ne: res.locals.user._id },
+  });
+  res.send(users)
+})
