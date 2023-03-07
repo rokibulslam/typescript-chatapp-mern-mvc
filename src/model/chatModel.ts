@@ -2,12 +2,17 @@ import { UserDocument } from './userModel';
 import mongoose, { Schema } from 'mongoose';
 import { MessageDocument } from './messageModel';
 
-
-export interface ChatDocument extends mongoose.Document {
+export interface SingleChat {
   chatName: string;
   isGroupChat: boolean;
   users: Array<UserDocument["_id"]>;
+}
+export interface GroupChat extends SingleChat{
   groupAdmin?: UserDocument["_id"];
+}
+export interface ChatDocument extends GroupChat, mongoose.Document {
+  
+  
   latestMessage?: MessageDocument["_id"];
   createdAt: Date;
   updatedAt: Date;
