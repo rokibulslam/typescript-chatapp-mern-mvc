@@ -43,6 +43,7 @@ const Login = () => {
   };
   return (
     <div className="">
+      <ToastContainer />
       <form action="" onSubmit={(e) => handleSubmit(e)} className="space-y-3">
         <div className="flex flex-col">
           <label htmlFor="">Enter Your Email</label>
