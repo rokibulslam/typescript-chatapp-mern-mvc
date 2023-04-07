@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Login from "../../components/Login/Login";
 import Register from "../../components/Register/Register";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   const [activeTab, setActiveTab] = useState(0);
@@ -14,6 +15,15 @@ const Home = () => {
       content: <Register />,
     },
   ];
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const userInfo = JSON.parse(localStorage.getItem("userInfo") || "null");
+
+    if (userInfo) navigate("/chats");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [navigate]);
+
   return (
     <div className="min-h-screen bg-teal-400 flex items-center justify-center">
       <div className="space-y-4 home w-full p-4">

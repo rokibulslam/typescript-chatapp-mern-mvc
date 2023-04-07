@@ -1,23 +1,16 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { SingleChat, User } from "../../types/types";
+import SideDrawer from "../../components/SideDrwaer/SideDrawer";
+import { ChatState } from "../../context/useChat";
 
 const Chat = () => {
-    const [chats, setChats] = useState<SingleChat[] | null>(null);
+  const {user}= ChatState()
     
-  const fetchChats = async () => {
-      const {data} = await axios.get("/chats");
-    setChats(data)
-  };
-  useEffect(() => {
-    fetchChats();
-  }, []);
-    
-    return <div>
-        {chats && chats.map((chat, index) => <div key={index}>
-          {chat.chatName}
-      </div>)}
-  </div>;
+  return (
+    <div>
+      <div>
+        {user&& <SideDrawer />}
+      </div>
+    </div>
+  );
 };
 
 export default Chat;
