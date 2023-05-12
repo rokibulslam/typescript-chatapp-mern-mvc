@@ -4,7 +4,7 @@ import Register from "../../components/Register/Register";
 import { useNavigate } from "react-router-dom";
 
 const Home = () => {
-  const [activeTab, setActiveTab] = useState(0);
+  const [activeTab, setActiveTab] = useState<number>(0);
   const tabs = [
     {
       label: "Login",

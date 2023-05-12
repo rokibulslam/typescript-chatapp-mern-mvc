@@ -1,7 +1,7 @@
 import { chats } from './data/data';
 import express from 'express';
 import dotenv from 'dotenv';
-import connectDB from "./config/db.js";
+import connectDB from './config/db'
 import router from './routes/routes';
 import { errorHandler, notFound } from './middleware/errorHandler';
 dotenv.config()
