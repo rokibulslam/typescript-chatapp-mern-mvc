@@ -1,8 +1,11 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { createContext, useContext, useState } from "react";
+
 export interface User {
   name: string;
   email: string;
+  picture: string;
+  _id: string;
+  token: string;
 }
 
 export interface SingleChat {
@@ -14,8 +17,8 @@ export interface SingleChat {
 interface ChatContextProps {
   selectedChat: SingleChat;
   setSelectedChat: React.Dispatch<React.SetStateAction<SingleChat>>;
-  user: User[];
-  setUser: React.Dispatch<React.SetStateAction<User[]>>;
+  user: User;
+  setUser: React.Dispatch<React.SetStateAction<User>>;
   notification: string;
   setNotification: React.Dispatch<React.SetStateAction<string>>;
   chats: SingleChat[];
@@ -28,7 +31,7 @@ interface ChatContextProps {
 const ChatContext = createContext<ChatContextProps>({
   selectedChat: {} as SingleChat,
   setSelectedChat: () => {},
-  user: [] as User[],
+  user: {} as User,
   setUser: () => {},
   notification: "",
   setNotification: () => {},
@@ -38,7 +41,7 @@ const ChatContext = createContext<ChatContextProps>({
 const ChatProvider = ({ children }:{children:React.ReactNode}) => {
 
   const [selectedChat, setSelectedChat] = useState<SingleChat>({} as SingleChat);
-  const [user, setUser] = useState<User[]>([]);
+  const [user, setUser] = useState<User>({}as User);
   const [notification, setNotification] = useState<string>("");
   const [chats, setChats] = useState<SingleChat[]>([]);
 

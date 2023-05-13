@@ -1,11 +1,13 @@
 import axios from 'axios';
-import React, { useState } from 'react'
+import React, {  useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from "react-toastify";
+import { ChatState } from '../../context/useChat';
 
 
 const Login = () => {
   const navigate = useNavigate();
+  const {setUser} = ChatState()
     const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [loading, setLoading] = useState(false);
@@ -34,6 +36,7 @@ const Login = () => {
       );
       toast("Login Successfull");
       localStorage.setItem("userInfo", JSON.stringify(data));
+      setUser(data)
       setLoading(false);
       navigate("/chats");
     } catch (error) {

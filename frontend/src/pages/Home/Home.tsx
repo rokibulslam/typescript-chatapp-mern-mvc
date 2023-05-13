@@ -19,7 +19,6 @@ const Home = () => {
 
   useEffect(() => {
     const userInfo = JSON.parse(localStorage.getItem("userInfo") || "null");
-
     if (userInfo) navigate("/chats");
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [navigate]);
